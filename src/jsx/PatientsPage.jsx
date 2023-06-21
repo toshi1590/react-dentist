@@ -4,14 +4,14 @@ import PatientsPageModule from '../module_css/PatientsPage.module.css';
 import { Link } from 'react-router-dom';
 
 const PatientsPage = () => {
-  const [patients,setPatients] = useState([]);
+  const [patients, setPatients] = useState();
   const [tds, setTds] = useState();
   
   // const display_ths = () => {
   // }
 
-  const display_tds = (patients) => {
-    setPatients(patients.map(patient => {
+  const display_tds = (json_data) => {
+    setTds(json_data.map(patient => {
       return (
         <>
           <div className={PatientsPageModule.td}>{patient.id}</div>
@@ -35,6 +35,7 @@ const PatientsPage = () => {
     fetch('http://localhost:81/patients')
     .then(res => res.json())
     .then(json_data => {
+      setPatients(json_data);
       display_tds(json_data);
     })
   }, []);
@@ -46,6 +47,7 @@ const PatientsPage = () => {
     fetch(`http://localhost:81/patients?sorted_column=${column}&order=${order}`)
     .then(res => res.json())
     .then(json_data => {
+      setPatients(json_data);
       display_tds(json_data);
     })
   }
@@ -81,7 +83,7 @@ const PatientsPage = () => {
         </div>
         <div className={PatientsPageModule.th}></div>
         <div className={PatientsPageModule.th}></div>
-        {patients}
+        {tds}
       </div>
       <Pagination />
     </>
