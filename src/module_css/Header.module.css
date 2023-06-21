@@ -1,0 +1,13 @@
+.navbar {
+  display: flex;
+  /* justify-content: flex-end; */
+  /* justify-content: center; */
+  justify-content: space-evenly;
+  background: lightgray;
+}
+
+.tab {
+  text-decoration: none;
+  color: black;
+  margin: 5px 10px 5px 0;
+}

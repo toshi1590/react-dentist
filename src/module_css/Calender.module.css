@@ -1,0 +1,25 @@
+.title {
+  text-align: center;
+  margin: 0 0 10px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.table {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.th {
+  text-align: center;
+}
+
+.td {
+  text-align: center;
+}
+
+.button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
