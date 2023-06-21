@@ -44,12 +44,38 @@ const PatientsPage = () => {
     const column = e.target.dataset.column;
     const order = e.target.dataset.order;
 
-    fetch(`http://localhost:81/patients?sorted_column=${column}&order=${order}`)
-    .then(res => res.json())
-    .then(json_data => {
-      setPatients(json_data);
-      display_tds(json_data);
+    setPatients((patients) => {
+      if (order == 'asc') {
+        patients.sort((first, second) => {
+          if (first[column] > second[column]){
+            return 1;
+          } else if (first[column] < second[column]) {
+            return -1;
+          } else {
+            return 0;
+          }
+        });
+      } else {
+        patients.sort((first, second) => {
+          if (first[column] > second[column]){
+            return -1;
+          } else if (first[column] < second[column]) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });  
+      }
+
+
+      display_tds(patients);
+
+
+      return patients;
     })
+
+
+    // display_tds(patients);
   }
 
   const del = (e) => {
