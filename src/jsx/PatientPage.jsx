@@ -1,25 +1,26 @@
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import PatientPageModule from '../module_css/PatientPage.module.css';
 
 const PatientPage = () => {
   return (
     <>
       <div>Patient</div>
-      <form action="">
-        form table???
-        <div>
-          <label htmlFor="">id</label>
-          <input type="text" defaultValue={useParams().id} autoFocus />
+      <form action="" className={PatientPageModule.table}>
+        <div className={PatientPageModule.th}>id</div>
+        <div className={PatientPageModule.td}>
+          <input className={PatientPageModule.text} type="text" defaultValue={useParams().id} autoFocus />
         </div>
-        <div>
-          <label htmlFor="">name</label>
-          <input type="text" defaultValue={useLocation().state.name} />
+        <div className={PatientPageModule.th}>name</div>
+        <div className={PatientPageModule.td}>
+          <input className={PatientPageModule.text} type="text" defaultValue={useLocation().state.name} />
         </div>
-        <div>
-          <label htmlFor="">address</label>
-          <input type="text" defaultValue={useLocation().state.address} />
+        <div className={PatientPageModule.th}>address</div>
+        <div className={PatientPageModule.td}>
+          <input className={PatientPageModule.text} type="text" defaultValue={useLocation().state.address} />
         </div>
-        <div>
-          <input type="button" value="update" />
+        <div className={PatientPageModule.th}></div>
+        <div className={PatientPageModule.td}>
+          <input className={PatientPageModule.btn} type="button" value="update" />
         </div>
       </form>
     </>
