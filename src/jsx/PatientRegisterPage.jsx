@@ -2,7 +2,6 @@ import { useState } from "react";
 import FormCreation from './FormCreation';
 
 const PatientRegisterPage = () => {
-  // const elements = ['id', 'name', 'address', 'email'];
   const [result, setResult] = useState({text: '', color: ''});
   const [error, setError] = useState({id: '', name: '', address: '', email: ''});
 
@@ -69,13 +68,15 @@ const PatientRegisterPage = () => {
         result={result} 
         error={error} 
         elements={['id', 'name', 'address', 'email']} 
+        values={['', '', '', '']} 
+        hiddens={{}}
         submit_value="register" 
-        onClick={register}
-        width="50vw"
-        position="absolute"
-        top="50%"
-        left="50%"
-        translate="-50% -50%"
+        onClick={register} 
+        width="50vw" 
+        position="absolute" 
+        top="50%" 
+        left="50%" 
+        translate="-50% -50%" 
       />
     </>
   );

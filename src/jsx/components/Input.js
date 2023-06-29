@@ -4,6 +4,7 @@ const Input = styled.input.attrs(props => ({
   type: props.type,
   name: props.name,
   value: props.value,
+  defaultValue: props.defaultValue,
   onClick: props.onClick,
 }))` 
   display: block;

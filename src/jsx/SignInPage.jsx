@@ -66,13 +66,15 @@ export const SignInPage = () => {
         result={result} 
         error={error} 
         elements={['email', 'password']} 
+        values={['', '']} 
+        hiddens={{}}
         submit_value="sign in" 
-        onClick={sign_in}
-        width="50vw"
-        position="absolute"
-        top="50%"
-        left="50%"
-        translate="-50% -50%"
+        onClick={sign_in} 
+        width="50vw" 
+        position="absolute" 
+        top="50%" 
+        left="50%" 
+        translate="-50% -50%" 
       />
     </>
   );

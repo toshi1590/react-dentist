@@ -3,6 +3,7 @@ import FormCreation from './FormCreation';
 const SearchForm = () => {
   const search = (e) => {
     e.preventDefault();
+
     const name = document.forms[0].name.value;
 
     fetch(`http://localhost:8000/api/patients?name=${name}`)
@@ -17,7 +18,9 @@ const SearchForm = () => {
         title="Patient search" 
         result="" 
         error="" 
-        elements={['name']} 
+        elements={['name']}
+        values={['']}
+        hiddens={{}}
         submit_value="search" 
         onClick={search}
         width="calc(100% / 3)"

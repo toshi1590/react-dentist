@@ -1,4 +1,4 @@
-import {React} from 'react';
+import {React, useEffect, useState} from 'react';
 import SearchForm from './SearchForm.jsx';
 import PatientsTable from './PatientsTable';
 import Pagination from './Pagination.jsx';

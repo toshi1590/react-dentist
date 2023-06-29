@@ -13,6 +13,7 @@ const Pagination = (props) => {
   }
 
   const move = (e) => {
+    e.target.style.color = "red";
     setPage(Number(e.target.textContent));
   }
 
