@@ -1,6 +1,7 @@
 import {React, useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import PatientsPageModule from '../module_css/PatientsPage.module.css';
+import Button from './components/Button';
 
 const PatientsTable = () => {
   const [patients, setPatients] = useState();
@@ -15,12 +16,12 @@ const PatientsTable = () => {
           <div className={PatientsPageModule.td}>{patient.address}</div>
           <div className={PatientsPageModule.td}>{patient.email}</div>
           <div className={PatientsPageModule.td}>
-            <button className={PatientsPageModule.edit_btn}>
-              <Link to={`/patients/${patient.id}`} state={{name: patient.name, address: patient.address}}>edit</Link>
-            </button>
+            <Button background='green'>
+              <Link to={`/patients/${patient.id}`} state={{name: patient.name, address: patient.address, email: patient.email}}>edit</Link>
+            </Button>
           </div>
           <div className={PatientsPageModule.td}>
-            <button className={PatientsPageModule.delete_btn} onClick={del}>delete</button>
+            <Button background="red" data-delete_id={patient.id} onClick={del}>delete</Button>
           </div>
         </>
       )
@@ -28,7 +29,7 @@ const PatientsTable = () => {
   }
 
   useEffect(() => {
-    fetch('http://localhost:81/patients')
+    fetch('http://localhost:8000/api/patients')
     .then(res => res.json())
     .then(json_data => {
       setPatients(json_data);
@@ -75,33 +76,46 @@ const PatientsTable = () => {
   }
 
   const del = (e) => {
-    const answer = window.confirm('Are you sure to delete ...?');
-    answer == true ? window.alert('deleted') : window.alert('not deleted');
+    const answer = window.confirm(`Are you sure to delete user with id: ${e.target.dataset.delete_id}?`);
+    if (answer) {
+      fetch(`http://localhost:8000/api/patients/${e.target.dataset.delete_id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "_method=delete"
+      })
+      .then(res => res.json())
+      .then(json_data => {
+        setPatients(json_data);
+        display_tds(json_data);        
+      })
+    }
   }
 
   return (
     <>
-      <div>Patients</div>
+      <h1>Patients</h1>
       <div className={PatientsPageModule.table}>
         <div className={PatientsPageModule.th}>
           id
-          <button className={PatientsPageModule.sort_btn} data-column="id" data-order="asc" onClick={sort}>asc</button>
-          <button className={PatientsPageModule.sort_btn} data-column="id" data-order="desc" onClick={sort}>desc</button>
+          <Button background="blue" data-column="id" data-order="asc" onClick={sort}>asc</Button>
+          <Button background="blue" data-column="id" data-order="desc" onClick={sort}>desc</Button>
         </div>
         <div className={PatientsPageModule.th}>
           name
-          <button className={PatientsPageModule.sort_btn} data-column="name" data-order="asc" onClick={sort}>asc</button>
-          <button className={PatientsPageModule.sort_btn} data-column="name" data-order="desc" onClick={sort}>desc</button>
+          <Button background="blue" data-column="name" data-order="asc" onClick={sort}>asc</Button>
+          <Button background="blue" data-column="name" data-order="desc" onClick={sort}>desc</Button>
         </div>
         <div className={PatientsPageModule.th}>
           address
-          <button className={PatientsPageModule.sort_btn} data-column="address" data-order="asc" onClick={sort}>asc</button>
-          <button className={PatientsPageModule.sort_btn} data-column="address" data-order="desc" onClick={sort}>desc</button>
+          <Button background="blue" data-column="address" data-order="asc" onClick={sort}>asc</Button>
+          <Button background="blue" data-column="address" data-order="desc" onClick={sort}>desc</Button>
         </div>
         <div className={PatientsPageModule.th}>
           email
-          <button className={PatientsPageModule.sort_btn} data-column="email" data-order="asc" onClick={sort}>asc</button>
-          <button className={PatientsPageModule.sort_btn} data-column="email" data-order="desc" onClick={sort}>desc</button>
+          <Button background="blue" data-column="email" data-order="asc" onClick={sort}>asc</Button>
+          <Button background="blue" data-column="email" data-order="desc" onClick={sort}>desc</Button>
         </div>
         <div className={PatientsPageModule.th}></div>
         <div className={PatientsPageModule.th}></div>

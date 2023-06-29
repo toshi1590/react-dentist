@@ -7,7 +7,7 @@ a {
   color: black;
 }
 
-button, input[type="button"], input[type="submit"] {
+input[type="button"], input[type="submit"] {
   cursor: pointer;
   border: none;
   border-radius: 5px;

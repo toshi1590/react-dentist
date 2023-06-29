@@ -1,9 +1,10 @@
 <?php
-header("Access-Control-Allow-Origin: *");
+include_once './Authentication.php';
+
+header("Access-Control-Allow-Origin: http://localhost:3000");
+header("Access-Control-Allow-Credentials: true");
+
 // $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL ); 
 $email = filter_input(INPUT_POST, 'email'); 
 $password = filter_input(INPUT_POST, 'password');
-
-session_start();
-
-($email == 'a' && $password == 'a') ? print('signed in') : print('not signed in');
+Authentication::sign_in($email, $password);
