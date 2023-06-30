@@ -4,13 +4,14 @@ import PatientsTable from './PatientsTable';
 import Pagination from './Pagination.jsx';
 
 const PatientsPage = () => {
-  const the_number_of_pages = 4;
+  const [page, setPage] = useState(1);
+  const [pages, setPages] = useState();
 
   return (
-    <>      
+    <>
       <SearchForm />
-      <PatientsTable />
-      <Pagination the_number_of_pages={the_number_of_pages} />
+      <PatientsTable page={page} setPages={setPages} />
+      <Pagination pages={pages} setPage={setPage} />
     </>
   );
 }

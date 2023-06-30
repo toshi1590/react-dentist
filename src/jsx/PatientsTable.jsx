@@ -3,12 +3,40 @@ import { Link } from 'react-router-dom';
 import PatientsPageModule from '../module_css/PatientsPage.module.css';
 import Button from './components/Button';
 
-const PatientsTable = () => {
+const PatientsTable = (props) => {
   const [patients, setPatients] = useState();
   const [tds, setTds] = useState();
 
-  const display_tds = (json_data) => {
-    setTds(json_data.map(patient => {
+  let beginning;
+  let ending;
+
+  useEffect(() => {
+    fetch('http://localhost:8000/api/patients')
+    .then(res => res.json())
+    .then(patients => {
+      setPatients(patients);
+
+      beginning = 0;
+      ending = 5;
+
+      display_tds(patients, beginning, ending);
+      props.setPages(Math.ceil(patients.length / 5));
+    })
+  }, []);
+
+  useEffect(() => {
+    // prevent the 1st rendering
+    if (patients != null) {
+      
+      beginning = (props.page - 1) * 5;
+      ending = beginning + 5; 
+      
+      display_tds(patients, beginning, ending);      
+    }
+  }, [props.page]);
+
+  const display_tds = (patients, beginning, ending) => {
+    setTds(patients.slice(beginning, ending).map(patient => {
       return (
         <>
           <div className={PatientsPageModule.td}>{patient.id}</div>
@@ -27,15 +55,6 @@ const PatientsTable = () => {
       )
     }));
   }
-
-  useEffect(() => {
-    fetch('http://localhost:8000/api/patients')
-    .then(res => res.json())
-    .then(json_data => {
-      setPatients(json_data);
-      display_tds(json_data);
-    })
-  }, []);
 
   const sort = e => {
     const column = e.target.dataset.column;
@@ -64,19 +83,17 @@ const PatientsTable = () => {
         });  
       }
 
+      beginning = (props.page - 1) * 5;
+      ending = beginning + 5; 
 
-      display_tds(patients);
-
-
+      display_tds(patients, beginning, ending);
       return patients;
     })
-
-
-    // display_tds(patients);
   }
 
   const del = (e) => {
     const answer = window.confirm(`Are you sure to delete user with id: ${e.target.dataset.delete_id}?`);
+    
     if (answer) {
       fetch(`http://localhost:8000/api/patients/${e.target.dataset.delete_id}`, {
         method: "POST",
@@ -86,9 +103,9 @@ const PatientsTable = () => {
         body: "_method=delete"
       })
       .then(res => res.json())
-      .then(json_data => {
-        setPatients(json_data);
-        display_tds(json_data);        
+      .then(patients => {
+        setPatients(patients);
+        display_tds(patients);        
       })
     }
   }
