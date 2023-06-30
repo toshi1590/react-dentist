@@ -105,7 +105,13 @@ const PatientsTable = (props) => {
       .then(res => res.json())
       .then(patients => {
         setPatients(patients);
-        display_tds(patients);        
+
+        beginning = 0;
+        ending = 5;
+
+        display_tds(patients, beginning, ending);
+
+        props.setPage(1);
       })
     }
   }
@@ -113,6 +119,10 @@ const PatientsTable = (props) => {
   return (
     <>
       <h1>Patients</h1>
+      {`beginning: ${beginning}`}
+      <br />
+      {`ending: ${ending}`}
+      <br />
       <div className={PatientsPageModule.table}>
         <div className={PatientsPageModule.th}>
           id
