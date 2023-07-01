@@ -1,42 +1,28 @@
 import { useEffect, useState } from "react";
 
 const Pagination = (props) => {
-  const [page, setPage] = useState(1);
-
   useEffect(() => {
-    console.log(document.querySelectorAll('.page_button'));
-    console.log(document.querySelectorAll('.page_button').length);
+    const page_buttons = document.querySelectorAll('.page_button');
 
-    alert('rendered');
-
-  }, [])
-
-  useEffect(() => {
-    props.setPage(page);
-
-    // console.log(document.querySelectorAll('.page_button'));
-    // console.log(document.querySelectorAll('.page_button')[0]);
-    // console.log(document.querySelectorAll('.page_button').length);
-
-    // const page_buttons = document.querySelectorAll('.page_button');
-    // page_buttons.forEach(element => {
-    //   console.log(element);
-
-    //   element.style.color ='red';
-    // })
-
-  }, [page])
+    page_buttons.forEach((element, index) => {
+      if (index == props.page - 1) {
+        element.style.color = 'red';        
+      } else {
+        element.style.color = 'black';
+      }
+    })
+  }, [props.page])
 
   const back = () => {
-    page > 1 ? setPage(page - 1) : setPage(1);
+    props.page > 1 ? props.setPage(props.page - 1) : props.setPage(1);
   }
 
   const next = () => {
-    page < props.pages ? setPage(page + 1) : setPage(props.pages);
+    props.page < props.pages ? props.setPage(props.page + 1) : props.setPage(props.pages);
   }
 
   const move = (e) => {
-    setPage(Number(e.target.textContent));
+    props.setPage(Number(e.target.textContent));
   }
 
   const buttons = [...Array(props.pages)].map((element, index) => {
@@ -45,7 +31,6 @@ const Pagination = (props) => {
 
   return (
     <>
-      <div>Pagination</div>
       <button onClick={back}>{'<'}</button>
       {buttons}
       <button onClick={next}>{'>'}</button>

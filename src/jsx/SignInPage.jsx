@@ -7,6 +7,18 @@ export const SignInPage = () => {
   const [error, setError] = useState({email: '', password: ''});
   const navigate = useNavigate();
 
+  useEffect(() => {
+    fetch('http://localhost//react_dentist/src/signin_check.php', {
+      credentials: 'include'
+    })
+    .then(res => res.text())
+    .then(text => {
+      if (text == 'success') {
+        navigate('/mypage');
+      }
+    })
+  }, [])
+
   const sign_in = (event) => {
     event.preventDefault();
     const email = document.forms.sign_in_form.email.value;
@@ -45,18 +57,6 @@ export const SignInPage = () => {
       })
     }
   }
-
-  useEffect(() => {
-    fetch('http://localhost//react_dentist/src/signin_check.php', {
-      credentials: 'include'
-    })
-    .then(res => res.text())
-    .then(text => {
-      if (text == 'success') {
-        navigate('/mypage');
-      }
-    })
-  }, [])
 
   return (
     <>

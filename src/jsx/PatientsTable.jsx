@@ -18,19 +18,17 @@ const PatientsTable = (props) => {
 
       beginning = 0;
       ending = 5;
-
       display_tds(patients, beginning, ending);
+      
       props.setPages(Math.ceil(patients.length / 5));
     })
   }, []);
 
   useEffect(() => {
     // prevent the 1st rendering
-    if (patients != null) {
-      
+    if (patients != null) {      
       beginning = (props.page - 1) * 5;
       ending = beginning + 5; 
-      
       display_tds(patients, beginning, ending);      
     }
   }, [props.page]);
@@ -85,8 +83,8 @@ const PatientsTable = (props) => {
 
       beginning = (props.page - 1) * 5;
       ending = beginning + 5; 
-
       display_tds(patients, beginning, ending);
+
       return patients;
     })
   }
@@ -108,7 +106,6 @@ const PatientsTable = (props) => {
 
         beginning = 0;
         ending = 5;
-
         display_tds(patients, beginning, ending);
 
         props.setPage(1);

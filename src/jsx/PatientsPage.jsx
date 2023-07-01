@@ -1,5 +1,5 @@
 import {React, useState} from 'react';
-import SearchForm from './SearchForm.jsx';
+import PatientSearchForm from './PatientSearchForm.jsx';
 import PatientsTable from './PatientsTable';
 import Pagination from './Pagination.jsx';
 
@@ -9,9 +9,9 @@ const PatientsPage = () => {
 
   return (
     <>
-      <SearchForm />
+      <PatientSearchForm />
       <PatientsTable page={page} setPage={setPage} setPages={setPages} />
-      <Pagination pages={pages} setPage={setPage} />
+      <Pagination page={page} pages={pages} setPage={setPage} />
     </>
   );
 }
