@@ -1,14 +1,23 @@
 import FormCreation from './FormCreation';
 
-const PatientSearchForm = () => {
+const PatientSearchForm = (props) => {
   const search = (e) => {
     e.preventDefault();
 
-    const name = document.forms[0].name.value;
+    const name = document.forms.patient_search_form.name.value;
+    let found_patients;
 
-    fetch(`http://localhost:8000/api/patients?name=${name}`)
-    .then(res => res.json())
-    .then(json_data => console.log(json_data))   
+    if (name == '') {
+      found_patients = props.patients;
+    } else {
+      found_patients = props.patients.filter(patient => {
+        if (patient.name == name) {
+          return patient
+        }
+      })      
+    }
+
+    props.setFountPatients(found_patients);
   }
 
   return (
