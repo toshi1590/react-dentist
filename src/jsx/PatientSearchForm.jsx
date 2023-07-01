@@ -18,6 +18,7 @@ const PatientSearchForm = (props) => {
     }
 
     props.setFountPatients(found_patients);
+    props.setPage(1);
   }
 
   return (

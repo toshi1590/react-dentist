@@ -6,7 +6,6 @@ import Pagination from './Pagination.jsx';
 const PatientsPage = () => {
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState();
-
   const [patients, setPatients] = useState();
   const [found_patients, setFountPatients] = useState();
 
@@ -19,14 +18,10 @@ const PatientsPage = () => {
     })
   }, []);
 
-  useEffect(() => {
-    console.log(found_patients);
-  }, [found_patients])
-
   return (
     <>
-      <PatientSearchForm patients={patients} setFountPatients={setFountPatients} />
-      <PatientsTable patients={found_patients} page={page} setPage={setPage} setPages={setPages} />
+      <PatientSearchForm patients={patients} setFountPatients={setFountPatients} setPage={setPage} />
+      <PatientsTable patients={found_patients} setPatients={setFountPatients} page={page} setPage={setPage} setPages={setPages} />
       <Pagination page={page} pages={pages} setPage={setPage} />
     </>
   );

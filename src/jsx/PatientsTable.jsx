@@ -4,32 +4,26 @@ import PatientsPageModule from '../module_css/PatientsPage.module.css';
 import Button from './components/Button';
 
 const PatientsTable = (props) => {
-  const [patients, setPatients] = useState();
   const [tds, setTds] = useState();
-
   let beginning;
   let ending;
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/patients')
-    .then(res => res.json())
-    .then(patients => {
-      setPatients(patients);
-
+    // prevent the 1st rendering
+    if (props.patients != null) {
       beginning = 0;
       ending = 5;
-      display_tds(patients, beginning, ending);
-      
-      props.setPages(Math.ceil(patients.length / 5));
-    })
-  }, []);
+      display_tds(props.patients, beginning, ending);
+      props.setPages(Math.ceil(props.patients.length / 5));  
+    }
+  }, [props.patients]);
 
   useEffect(() => {
     // prevent the 1st rendering
-    if (patients != null) {      
+    if (props.patients != null) {      
       beginning = (props.page - 1) * 5;
       ending = beginning + 5; 
-      display_tds(patients, beginning, ending);      
+      display_tds(props.patients, beginning, ending);      
     }
   }, [props.page]);
 
@@ -58,7 +52,7 @@ const PatientsTable = (props) => {
     const column = e.target.dataset.column;
     const order = e.target.dataset.order;
 
-    setPatients((patients) => {
+    props.setPatients((patients) => {
       if (order == 'asc') {
         patients.sort((first, second) => {
           if (first[column] > second[column]){
@@ -89,7 +83,7 @@ const PatientsTable = (props) => {
     })
   }
 
-  const del = (e) => {
+  const del = e => {
     const answer = window.confirm(`Are you sure to delete user with id: ${e.target.dataset.delete_id}?`);
     
     if (answer) {
@@ -102,7 +96,7 @@ const PatientsTable = (props) => {
       })
       .then(res => res.json())
       .then(patients => {
-        setPatients(patients);
+        props.setPatients(patients);
 
         beginning = 0;
         ending = 5;
