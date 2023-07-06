@@ -11,9 +11,9 @@ export const SignInPage = () => {
     fetch('http://localhost//react_dentist/src/signin_check.php', {
       credentials: 'include'
     })
-    .then(res => res.text())
-    .then(text => {
-      if (text == 'success') {
+    .then(res => res.status)
+    .then(status => {
+      if (status == '200') {
         navigate('/mypage');
       }
     })
@@ -47,9 +47,9 @@ export const SignInPage = () => {
         credentials: 'include',
         body: `email=${email}&password=${password}`
       })
-      .then(res => res.text())
-      .then(text => {
-        if (text == 'success') {
+      .then(res => res.status)
+      .then(status => {
+        if (status == '200') {
           navigate('/mypage');
         } else {
           setResult(result => ({...result, text: 'Failure', color: 'red'}));          

@@ -6,8 +6,10 @@ class Authentication {
       $_SESSION['email'] = $email;
       // json_encode($email)
       // setcookie('email', 'a', time() + 60 * 60 * 24, '/');
-      print('success');
-    } 
+      header( "HTTP/1.1 200 OK" ) ;
+    } else {
+      header( "HTTP/1.1 403 Forbidden" ) ;
+    }
   }
 
   public static function sign_out () {
@@ -21,11 +23,11 @@ class Authentication {
     session_start();
 
     if (isset($_COOKIE['PHPSESSID']) && $_COOKIE['PHPSESSID'] == session_id()) {
-      print('success');
+      header( "HTTP/1.1 200 OK" ) ;
     } else {
       session_destroy();
       setcookie("PHPSESSID", '', time() - 1800, '/');
-      print('failure'); 
+      header( "HTTP/1.1 403 Forbidden" ) ;
     }
   }
 }
