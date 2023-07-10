@@ -110,10 +110,6 @@ const PatientsTable = (props) => {
   return (
     <>
       <h1>Patients</h1>
-      {`beginning: ${beginning}`}
-      <br />
-      {`ending: ${ending}`}
-      <br />
       <div className={PatientsPageModule.table}>
         <div className={PatientsPageModule.th}>
           id

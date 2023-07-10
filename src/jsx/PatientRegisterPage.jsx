@@ -1,4 +1,3 @@
-import { useState } from "react";
 import FormCreation from './FormCreation';
 import useValidation from './Validation';
 
@@ -8,17 +7,16 @@ const PatientRegisterPage = () => {
   const register = (event) => {
     event.preventDefault();
 
-    const id = document.forms.patient_register_form.id.value;
     const name = document.forms.patient_register_form.name.value;
     const address = document.forms.patient_register_form.address.value;
     const email = document.forms.patient_register_form.email.value;
     
-    validate({id: id, name: name, address: address, email: email});
+    validate({name: name, address: address, email: email});
  
-    if (id !== '' && name !== '' && address !== '' && email !== '') {
+    if (name !== '' && address !== '' && email !== '') {
       fetch('http://localhost:8000/api/patients', {
         method: 'POST',
-        body: new FormData(document.forms[0])
+        body: new FormData(document.forms.patient_register_form)
       })
       .then(res => res.json())
       .then(json_data => {
@@ -41,8 +39,8 @@ const PatientRegisterPage = () => {
         title="Patient Register" 
         result={result} 
         error={error} 
-        elements={['id', 'name', 'address', 'email']} 
-        values={['', '', '', '']} 
+        elements={['name', 'address', 'email']} 
+        values={['', '', '']} 
         hiddens={{}}
         submit_value="register" 
         onClick={register} 
