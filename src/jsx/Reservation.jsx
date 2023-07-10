@@ -7,9 +7,7 @@ export const Reservation = (props) => {
     return (
       <>
         <div>
-          <span>date: {reservation.date}</span>
-          <span>---</span>
-          <span>patient id: {reservation.patient_id}</span>
+          {`${reservation.date.match(/\d{2}:\d{2}:\d{2}/)} --- ${reservation.name}`}
         </div>    
       </>
     );
@@ -21,13 +19,14 @@ export const Reservation = (props) => {
     .then(json_data => {
       setReservations([]);
       json_data.map(reservation => {
-        setReservations(reservations => [...reservations, {date: reservation.date, patient_id: reservation.patient_id}]);
+        setReservations(reservations => [...reservations, {date: reservation.date, name: reservation.name}]);
       });
     })
   }, [props])
  
   return (
     <>
+      <div>{`${props.year}/${props.month}/${props.day}`}</div>
       <div>{tds}</div>
     </>
   );

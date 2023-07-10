@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import FormCreation from './FormCreation';
 
 export const SignInPage = () => {
-  const [result, setResult] = useState({text: '', color: ''});
-  const [error, setError] = useState({email: '', password: ''});
+  const [result, setResult] = useState({});
+  const [error, setError] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {

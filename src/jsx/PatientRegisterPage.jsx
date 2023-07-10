@@ -2,8 +2,8 @@ import { useState } from "react";
 import FormCreation from './FormCreation';
 
 const PatientRegisterPage = () => {
-  const [result, setResult] = useState({text: '', color: ''});
-  const [error, setError] = useState({id: '', name: '', address: '', email: ''});
+  const [result, setResult] = useState({});
+  const [error, setError] = useState({});
 
   const register = (event) => {
     event.preventDefault();
