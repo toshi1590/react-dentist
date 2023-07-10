@@ -1,9 +1,9 @@
 import { useState } from "react";
 import FormCreation from './FormCreation';
+import useValidation from './Validation';
 
 const PatientRegisterPage = () => {
-  const [result, setResult] = useState({});
-  const [error, setError] = useState({});
+  const [error, result, setResult, validate] = useValidation();
 
   const register = (event) => {
     event.preventDefault();
@@ -13,34 +13,8 @@ const PatientRegisterPage = () => {
     const address = document.forms.patient_register_form.address.value;
     const email = document.forms.patient_register_form.email.value;
     
-    if (id == '') {
-      setError(error => ({...error, id: 'must not be empty'}));
-      setResult(result => ({...result, text: '', color: ''})); 
-    } else {
-      setError((error) => ({...error, id: ''}));
-    }
-
-    if (name == '') {
-      setError(error => ({...error, name: 'must not be empty'}));
-      setResult(result => ({...result, text: '', color: ''})); 
-    } else {
-      setError((error) => ({...error, name: ''}));
-    }
-
-    if (address == '') {
-      setError(error => ({...error, address: 'must not be empty'}));
-      setResult(result => ({...result, text: '', color: ''})); 
-    } else {
-      setError((error) => ({...error, address: ''}));
-    }
-    
-    if (email == '') {
-      setError(error => ({...error, email: 'must not be empty'}));
-      setResult(result => ({...result, text: '', color: ''})); 
-    } else {
-      setError((error) => ({...error, email: ''}));
-    }
-    
+    validate({id: id, name: name, address: address, email: email});
+ 
     if (id !== '' && name !== '' && address !== '' && email !== '') {
       fetch('http://localhost:8000/api/patients', {
         method: 'POST',
