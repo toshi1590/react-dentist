@@ -44,7 +44,7 @@ const PatientPage = () => {
     }
 
     if (id !== '' && name !== '' && address !== '' && email !== '') {
-      fetch(`http://localhost:8000/api/patients/${id}`, {
+      fetch(`http://localhost:83/api/patients/${id}`, {
         method: "POST",
         body: new FormData(document.forms.patient_edit_form)
       })

@@ -10,7 +10,7 @@ const PatientsPage = () => {
   const [found_patients, setFountPatients] = useState();
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/patients')
+    fetch('http://localhost:83/api/patients')
     .then(res => res.json())
     .then(patients => {
       setPatients(patients);

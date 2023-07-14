@@ -14,7 +14,7 @@ const PatientRegisterPage = () => {
     validate({name: name, address: address, email: email});
  
     if (name !== '' && address !== '' && email !== '') {
-      fetch('http://localhost:8000/api/patients', {
+      fetch('http://localhost:83/api/patients', {
         method: 'POST',
         body: new FormData(document.forms.patient_register_form)
       })

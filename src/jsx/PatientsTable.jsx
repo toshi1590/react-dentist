@@ -87,7 +87,7 @@ const PatientsTable = (props) => {
     const answer = window.confirm(`Are you sure to delete user with id: ${e.target.dataset.delete_id}?`);
     
     if (answer) {
-      fetch(`http://localhost:8000/api/patients/${e.target.dataset.delete_id}`, {
+      fetch(`http://localhost:83/api/patients/${e.target.dataset.delete_id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"

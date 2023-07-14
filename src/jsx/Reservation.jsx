@@ -14,7 +14,7 @@ export const Reservation = (props) => {
   });
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/reservations/${props.year}/${props.month}/${props.day}`)
+    fetch(`http://localhost:83/api/reservations/${props.year}/${props.month}/${props.day}`)
     .then(res => res.json())
     .then(json_data => {
       setReservations([]);
