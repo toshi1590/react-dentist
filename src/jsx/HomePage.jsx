@@ -1,35 +1,35 @@
 import styled from "styled-components";
-
-const Content = styled.div`
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-`;
+import HomePageModule from "../module_css/HomePage.module.css";
 
 const Container = styled.div`
   display: flex;
-`;
-
-const Item = styled.div`
-  flex-grow: 1;
-  border: double 1px red;
-`;
+  justify-content: space-evenly;
+`
 
 const HomePage = () => {
   return (
     <>
       <h1>Iris</h1>
-      <Content>
-        <div>
-          <Container>
-            <Item>logo</Item>
-            <Item>logo</Item>
-            <Item>logo</Item>
-          </Container>
+      <Container>
+        <div className={HomePageModule.card}>
+          <img className={HomePageModule.card_img} src="https://cdn-icons-png.flaticon.com/512/2815/2815428.png" alt="" />  
+          <div>
+            aaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          </div>
         </div>
-        <div>
-          Sidebar
+        <div className={HomePageModule.card}>
+          <img className={HomePageModule.card_img} src="https://cdn-icons-png.flaticon.com/512/2815/2815428.png" alt="" /> 
+          <div>
+            aaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          </div> 
         </div>
-      </Content>
+        <div className={HomePageModule.card}>
+          <img className={HomePageModule.card_img} src="https://cdn-icons-png.flaticon.com/512/2815/2815428.png" alt="" />  
+          <div>
+            aaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          </div>
+        </div>
+      </Container>
     </>
   );
 }

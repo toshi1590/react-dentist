@@ -1,0 +1,8 @@
+.card {
+  width: 25%;
+  word-wrap: break-word;
+}
+
+.card_img {  
+  max-width: 100%;
+}
