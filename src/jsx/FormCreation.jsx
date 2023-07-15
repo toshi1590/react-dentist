@@ -4,23 +4,24 @@ import Label from './components/Label';
 import Input from './components/Input';
 import Result from './components/Result';
 import ErrorMsg from './components/ErrorMsg';
+import { Fragment } from 'react';
 
 const FormCreation = (props) => {
-  const hiddens = Object.entries(props.hiddens).map(element => {
+  const hiddens = Object.entries(props.hiddens).map((element, index) => {
     return (
-      <>
+      <Fragment key={index}>
         <Input 
           type="hidden" 
           name={element[0]} 
           defaultValue={element[1]} 
         /> 
-      </>
+      </Fragment>
     );
   })
 
   const labels_errors_inputs = [...Array(props.elements.length)].map((element, index) => {
     return (
-      <>
+      <Fragment key={index}>
         <Label children={props.elements[index]} htmlFor={props.elements[index]} />
         <ErrorMsg children={Object.values(props.error)[index]} />
         <Input 
@@ -28,7 +29,7 @@ const FormCreation = (props) => {
           name={props.elements[index]} 
           defaultValue={props.values[index]} 
         /> 
-      </>   
+      </Fragment>   
     );
   })
 

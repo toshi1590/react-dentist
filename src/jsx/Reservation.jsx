@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 export const Reservation = (props) => {
   const [reservations, setReservations] = useState([]);
 
-  const tds = reservations.map(reservation => {
+  const tds = reservations.map((reservation, index) => {
     return (
-      <>
+      <Fragment key={index}>
         <div>
           {`${reservation.date.match(/\d{2}:\d{2}:\d{2}/)} --- ${reservation.name}`}
         </div>    
-      </>
+      </Fragment>
     );
   });
 

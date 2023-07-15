@@ -1,4 +1,4 @@
-import {React, useEffect, useState} from 'react';
+import {Fragment, React, useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import PatientsPageModule from '../module_css/PatientsPage.module.css';
 import Button from './components/Button';
@@ -30,20 +30,20 @@ const PatientsTable = (props) => {
   const display_tds = (patients, beginning, ending) => {
     setTds(patients.slice(beginning, ending).map((patient, index) => {
       return (
-        <>
-          <div key={`tr: ${index + 1}, td; 1`} className={PatientsPageModule.td}>{patient.id}</div>
-          <div key={`tr: ${index + 1}, td; 2`} className={PatientsPageModule.td}>{patient.name}</div>
-          <div key={`tr: ${index + 1}, td; 3`} className={PatientsPageModule.td}>{patient.address}</div>
-          <div key={`tr: ${index + 1}, td; 4`} className={PatientsPageModule.td}>{patient.email}</div>
-          <div key={`tr: ${index + 1}, td; 5`} className={PatientsPageModule.td}>
-            <Button key={`tr: ${index + 1}, edit_btn`} background='green'>
-              <Link key={`tr: ${index + 1}, link`} to={`/patients/${patient.id}`} state={{name: patient.name, address: patient.address, email: patient.email}}>edit</Link>
+        <Fragment key={index}>
+          <div className={PatientsPageModule.td}>{patient.id}</div>
+          <div className={PatientsPageModule.td}>{patient.name}</div>
+          <div className={PatientsPageModule.td}>{patient.address}</div>
+          <div className={PatientsPageModule.td}>{patient.email}</div>
+          <div className={PatientsPageModule.td}>
+            <Button  background='green'>
+              <Link  to={`/patients/${patient.id}`} state={{name: patient.name, address: patient.address, email: patient.email}}>edit</Link>
             </Button>
           </div>
-          <div key={`tr: ${index + 1}, td; 6`} className={PatientsPageModule.td}>
-            <Button key={`tr: ${index + 1}, delete_btn`} background="red" data-delete_id={patient.id} onClick={del}>delete</Button>
+          <div  className={PatientsPageModule.td}>
+            <Button  background="red" data-delete_id={patient.id} onClick={del}>delete</Button>
           </div>
-        </>
+        </Fragment>
       )
     }));
   }
