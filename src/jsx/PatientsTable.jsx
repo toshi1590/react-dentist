@@ -1,29 +1,35 @@
-import {Fragment, React, useEffect, useState} from 'react';
+import {Fragment, React, useEffect, useRef, useState} from 'react';
 import { Link } from 'react-router-dom';
 import PatientsPageModule from '../module_css/PatientsPage.module.css';
 import Button from './components/Button';
 
 const PatientsTable = (props) => {
   const [tds, setTds] = useState();
+  const first_rendering_check_for_useEffect1 = useRef(true);
+  const first_rendering_check_for_useEffect2 = useRef(true);
   let beginning;
   let ending;
 
+  // useEffect1
   useEffect(() => {
-    // prevent the 1st rendering
-    if (props.patients != null) {
+    if (first_rendering_check_for_useEffect1.current === false) {
       beginning = 0;
       ending = 5;
       display_tds(props.patients, beginning, ending);
       props.setPages(Math.ceil(props.patients.length / 5));  
+    } else {
+      first_rendering_check_for_useEffect1.current = false;
     }
   }, [props.patients]);
 
+  // useEffect2
   useEffect(() => {
-    // prevent the 1st rendering
-    if (props.patients != null) {      
+    if (first_rendering_check_for_useEffect2.current === false) {
       beginning = (props.page - 1) * 5;
       ending = beginning + 5; 
-      display_tds(props.patients, beginning, ending);      
+      display_tds(props.patients, beginning, ending);   
+    } else {
+      first_rendering_check_for_useEffect2.current = false;
     }
   }, [props.page]);
 
