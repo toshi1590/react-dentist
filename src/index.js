@@ -8,6 +8,7 @@ import PatientRegisterPage from './jsx/PatientRegisterPage.jsx';
 import {ReservationPage} from './jsx/ReservationPage.jsx';
 import {MyPage} from './jsx/MyPage.jsx';
 import {SignInPage} from './jsx/SignInPage.jsx';
+import {ContactPage} from './jsx/ContactPage.jsx';
 import './index.css';
 
 const App = ReactDOM.createRoot(document.querySelector('#App'));
@@ -22,6 +23,7 @@ App.render(
       <Route path="/reservation" element={<ReservationPage />} />
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/signin" element={<SignInPage />} />
+      <Route path="/contact" element={<ContactPage />} />
       <Route path="*" element={<div>no page</div>} />
     </Routes>
   </BrowserRouter>

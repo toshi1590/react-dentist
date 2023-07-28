@@ -16,6 +16,7 @@ export const Header = () => {
         <NavLink className={HeaderModule.tab} style={({ isActive }) => (isActive ? { color: 'blue' } : undefined)} to="/patient_register">Patient Register</NavLink>
         <NavLink className={HeaderModule.tab} style={({ isActive }) => (isActive ? { color: 'blue' } : undefined)} to="/reservation">Reservation</NavLink>
         <NavLink className={HeaderModule.tab} style={({ isActive }) => (isActive ? { color: 'blue' } : undefined)} to="/mypage">My page</NavLink>
+        <NavLink className={HeaderModule.tab} style={({ isActive }) => (isActive ? { color: 'blue' } : undefined)} to="/contact">Contact</NavLink>
       </div>
     </header>
   );
