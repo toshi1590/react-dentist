@@ -9,6 +9,7 @@
 
 .img {
   width: 100%;
-  height: calc(100vh / 3);
+  height: calc(100vh / 2);
   object-fit: cover;
+  vertical-align: bottom;
 }
